@@ -13,6 +13,10 @@ on:
         description: 'folder name for staging the exported solution *do not change*'
         required: true
         default: out/solutions/exported/
+      managed:
+        description: 'Export as managed solution; default is to export as unmanaged solution'
+        required: false
+        default: 'false'
 env:
 #edit your values here
   ENVIRONMENT_URL: 'https://org80c0c729.crm8.dynamics.com/'
@@ -35,6 +39,7 @@ jobs:
         app-id: ${{env.CLIENT_ID}}
         client-secret: ${{ secrets.PowerPlatformSPN }}
         tenant-id: ${{env.TENANT_ID}}
+        managed: ${{ github.event.inputs.managed }}
         solution-name: ${{ github.event.inputs.solution_name }}
         solution-output-file: ${{ github.event.inputs.solution_exported_folder}}/${{ github.event.inputs.solution_name }}.zip
 
